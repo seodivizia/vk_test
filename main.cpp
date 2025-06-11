@@ -5,30 +5,30 @@
 #include "HttpRequestsCounter.h"
 #include <thread>
 
-//Для примера создаем глобальный объект типа Logger
-// передавая в качестве аргумента строку, обозначающую путь к лог-файлу
+//For example we create global object of type Logger
+// passing as an argument string, that denotes path to log-file
 Logger logger("log.txt");
 
-//Тестовая функция,которая вызывается из не main-потока
+//Test function< that called NOT in the main thread
 void func() {
 	logger.log();
 }
 
 int main()
 {
-	//создание необходимых метрик
-	//аргумент обозначает имя метрики
+	//Creation necessary metriks
+	//Argument is name of metrik
 	CPUUsage *cpuUsage = new CPUUsage("CPU");
 	HttpRequestsCounter *httpRequestsCouunter = new HttpRequestsCounter("HTTP requests RPS");	
 	
-	 //добавляем метрики внутрь logger
+	 //add metriks inside the logger
 	logger.add(cpuUsage);
 	logger.add(httpRequestsCouunter);
 
-	//имитируем событие записать лог
+	//invoke log to write to the file
 	logger.log();
 
-	//для примера создаем новый поток, и записываем оттуда лог
+	//for example we create new thread, and write log in it
 	std::thread t(func);
 	t.join();	 	 
 }

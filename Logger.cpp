@@ -10,16 +10,16 @@
 
 void Logger::log() {
 
-	//получаем log-строку
+	//get the log-string
 	auto logstr = get_log_str();
 
-	//вызываем запись в log-файл в отдельном потоке( асинхронный вызов)
+	//invoke writing to the log-file in another thread ( asynchronously)
 	auto  fut = std::async(std::launch::async, &Logger::write, this, logstr);
 
 	fut.get();
 }
 
-//непостредственная запись в log-файл
+//immediate writing to the log-file
 void Logger::write(const std::string &data) {
 
 	std::cout << data << std::endl;
@@ -31,7 +31,7 @@ void Logger::write(const std::string &data) {
 	fs.close();
 }
 
-//вычисляем таймштамп
+//compute timestamp
 std::string Logger::get_timestamp_str()
 {
 	using namespace std;
@@ -72,7 +72,7 @@ std::string Logger::get_timestamp_str()
 }
 
 
-//получаем форматированную строку , которая будет записана в log-файл
+//get the formatted sting, which will be written to the log-file
 std::string Logger::get_log_str() {
 
 	std::string s;

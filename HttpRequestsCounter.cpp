@@ -9,7 +9,7 @@ HttpRequestsCounter::HttpRequestsCounter(const std::string &name): Metrika(name)
 
 Metrika *HttpRequestsCounter::compute()
 {
-	//вычисляем метрику http requests count
+	//compute metrik http requests count
 	count = 11;
 	return this;
 }
