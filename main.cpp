@@ -30,5 +30,8 @@ int main()
 
 	//for example we create new thread, and write log in it
 	std::thread t(func);
-	t.join();	 	 
+	t.join();	 
+
+	delete cpuUsage;
+	delete httpRequestsCouunter;
 }
